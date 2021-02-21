@@ -47,7 +47,7 @@ function addPagination (array) {
       </li>`;
     ul.insertAdjacentHTML('beforeend', pageButton);
   }
-  let defaultButton = document.querySelector('button');
+  let defaultButton = ul.firstElementChild.firstElementChild;
   defaultButton.className = 'active';
   ul.addEventListener('click', (event) => {
     if (event.target.tagName === 'BUTTON') {
@@ -93,6 +93,7 @@ function searchFunction (searchInput) {
   showPage(searchResults, 1);
   addPagination(searchResults);
 }
+
 header.addEventListener('keyup', ( ) => {
   let input = document.querySelector('input');
   searchFunction(input.value);
