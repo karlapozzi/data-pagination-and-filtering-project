@@ -1,2 +1,2 @@
 # data-pagination-and-filtering-project
- My second Treehouse Techdegree project
+ My second Treehouse Techdegree project: A page that displays and paginates a list of students and student data. It also includes a search bar that filters results and updates pagination. 
