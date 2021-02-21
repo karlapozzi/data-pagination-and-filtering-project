@@ -1,6 +1,7 @@
 /*
-Treehouse Techdegree:
+This code is for my Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
+going for exceeds expectations grade.
 */
 
 /*
