@@ -4,8 +4,8 @@ FSJS Project 2 - Data Pagination and Filtering
 */
 
 /*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
+This function creates a page (or pages) of 9 students 
+with info about them from the data list. 
 */
 function showPage (list, page) {
   let startIndex = (page * 9) - 9;
@@ -32,11 +32,11 @@ function showPage (list, page) {
 
 
 /*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
+This fuction adds pagination buttons based on the number 
+of students in the data list (or search results).
 */
 function addPagination (array) {
-  let totalPages = array.length / 9;
+  let totalPages = Math.ceil(array.length / 9);
   let ul = document.getElementsByClassName('link-list')[0];
   ul.innerHTML = '';
   for (let i = 0; i < totalPages; i++) {
@@ -46,21 +46,24 @@ function addPagination (array) {
       </li>`;
     ul.insertAdjacentHTML('beforeend', pageButton);
   }
+  let defaultButton = document.querySelector('button');
+  defaultButton.className = 'active';
   ul.addEventListener('click', (event) => {
     if (event.target.tagName === 'BUTTON') {
-      let pages = ul.children;
+      let oldPage = document.querySelector('.active');
+      oldPage.className = '';
       let activePage = event.target; 
-      let pageNumber = activePage.textContent;
-      for (let i = 0; i < pages.length; i++) {
-        pages[i].className = '';
-      }
-      activePage.ClassName = 'active';
-      showPage(array, pageNumber);
+      activePage.className = 'active';
+      showPage(array, activePage.textContent);
     } 
   });
 }
 
 
-// Call functions
+
+/* Calls both functions above to set the default page to 1 
+and add pagination buttons based on the data.
+*/
 showPage(data, 1);
 addPagination(data);
+createSearch();
