@@ -90,14 +90,18 @@ function searchFunction (searchInput) {
       searchResults.push(data[i]);
     }
   }
-  showPage(searchResults, 1);
-  addPagination(searchResults);
+  let ul = header.nextElementSibling;
+  if (searchResults.length !== 0) {
+    showPage(searchResults, 1);
+    addPagination(searchResults);
+    ul.nextElementSibling.style.display = '';
+    } else {
+    ul.innerHTML = `<h3 align="center">No results found</h3>`;
+    ul.nextElementSibling.style.display = 'none';
+    }
 }
 
 header.addEventListener('keyup', ( ) => {
   let input = document.querySelector('input');
   searchFunction(input.value);
   });
-
-
-
