@@ -69,16 +69,18 @@ addPagination(data);
 
 
 /*
-This section adds a search bar to search the student list, 
-search functionality, and search pagination. 
+This section adds a search bar and search function that will be
+used in event handlers. The function loops through student data
+and adds matching results to a new searchResults data list, if there
+are 0 results, it shows a "no results" page. 
  */
 let header = document.querySelector('header');
-let search = `
+let searchBar = `
   <label for="search" class="student-search">
     <input id="search" placeholder="Search by name...">
     <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
   </label>`;
-header.insertAdjacentHTML('beforeend', search);
+header.insertAdjacentHTML('beforeend', searchBar);
 
 function searchFunction (searchInput) {
   let searchResults = [];
@@ -96,12 +98,32 @@ function searchFunction (searchInput) {
     addPagination(searchResults);
     ul.nextElementSibling.style.display = '';
     } else {
-    ul.innerHTML = `<h3 align="center">No results found</h3>`;
+    ul.innerHTML = `
+      <p class="no-results">
+      No results found
+      </p>`;
     ul.nextElementSibling.style.display = 'none';
     }
 }
 
-header.addEventListener('keyup', ( ) => {
-  let input = document.querySelector('input');
+
+/*
+The keyup event listener makes the search more dynamic by
+searching as the user types.
+
+The click event listener is for more edge case uses that keyup 
+might not catch. For example, search "b", go to page 2 of results, 
+then click search button. No keyup event occurred, but you 
+should be taken back to page 1 because it's a new search for "b".
+*/
+let input = document.querySelector('input');
+
+header.addEventListener('keyup', () => {
   searchFunction(input.value);
-  });
+});
+
+header.addEventListener('click', (event) => {
+  if (event.target.tagName === 'BUTTON') {
+    searchFunction(input.value);
+  }
+});
