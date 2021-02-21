@@ -33,7 +33,8 @@ function showPage (list, page) {
 
 /*
 This fuction adds pagination buttons based on the number 
-of students in the data list (or search results).
+of students in the data list (or search results), and listens
+for clicks on those buttons.
 */
 function addPagination (array) {
   let totalPages = Math.ceil(array.length / 9);
@@ -60,10 +61,42 @@ function addPagination (array) {
 }
 
 
-
 /* Calls both functions above to set the default page to 1 
 and add pagination buttons based on the data.
 */
 showPage(data, 1);
 addPagination(data);
-createSearch();
+
+
+/*
+This section adds a search bar to search the student list, 
+search functionality, and search pagination. 
+ */
+let header = document.querySelector('header');
+let search = `
+  <label for="search" class="student-search">
+    <input id="search" placeholder="Search by name...">
+    <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+  </label>`;
+header.insertAdjacentHTML('beforeend', search);
+
+function searchFunction (searchInput) {
+  let searchResults = [];
+  for (let i = 0; i < data.length; i++) {
+    let lowerCaseSearch = searchInput.toLowerCase();
+    let name = `${data[i].name.first} ${data[i].name.last}`
+    let lowerCaseName = name.toLowerCase();
+    if (lowerCaseName.includes(lowerCaseSearch)) {
+      searchResults.push(data[i]);
+    }
+  }
+  showPage(searchResults, 1);
+  addPagination(searchResults);
+}
+header.addEventListener('keyup', ( ) => {
+  let input = document.querySelector('input');
+  searchFunction(input.value);
+  });
+
+
+
