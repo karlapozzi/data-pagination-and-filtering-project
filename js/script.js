@@ -31,7 +31,6 @@ function showPage (list, page) {
   }
 }
 
-
 /*
 This fuction adds pagination buttons based on the number 
 of students in the data list (or search results), and listens
@@ -61,13 +60,12 @@ function addPagination (array) {
   });
 }
 
-
-/* Calls both functions above to set the default page to 1 
+/* 
+Calls both functions above to set the default page to 1 
 and add pagination buttons based on the data.
 */
 showPage(data, 1);
 addPagination(data);
-
 
 /*
 This section adds a search bar and search function that will be
@@ -106,7 +104,6 @@ function searchFunction (searchInput) {
     ul.nextElementSibling.style.display = 'none';
     }
 }
-
 
 /*
 The keyup event listener makes the search more dynamic by
